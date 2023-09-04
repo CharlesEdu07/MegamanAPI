@@ -49,7 +49,7 @@ Retorna um array com todos os chefes (Robot Masters):
 
 ### `GET /byId/<id>`
 
-Retorna um chefe (Robot Master) pelo seu `<id>` ou Número de Série. Os zeros iniciais são removidos. (por exemplo, `'014'` se torna -> `14`)
+Retorna um chefe (Robot Master) pelo seu `<id>`
 
 ```json
 {
