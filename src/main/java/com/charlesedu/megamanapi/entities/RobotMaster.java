@@ -1,5 +1,7 @@
 package com.charlesedu.megamanapi.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,14 +10,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_robot_master")
-public class RobotMaster {
+public class RobotMaster implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String series;
-    private String robot_id;
+    private String robot_number;
     private String name;
     private String weapon;
     private String avatar;
@@ -25,11 +28,11 @@ public class RobotMaster {
     public RobotMaster() {
     }
 
-    public RobotMaster(Long id, String series, String robot_id, String name, String weapon, String avatar,
+    public RobotMaster(Long id, String series, String robot_number, String name, String weapon, String avatar,
             String sprite, String weakness) {
         this.id = id;
         this.series = series;
-        this.robot_id = robot_id;
+        this.robot_number = robot_number;
         this.name = name;
         this.weapon = weapon;
         this.avatar = avatar;
@@ -53,12 +56,12 @@ public class RobotMaster {
         this.series = series;
     }
 
-    public String getRobot_id() {
-        return robot_id;
+    public String getrobot_number() {
+        return robot_number;
     }
 
-    public void setRobot_id(String robot_id) {
-        this.robot_id = robot_id;
+    public void setrobot_number(String robot_number) {
+        this.robot_number = robot_number;
     }
 
     public String getName() {
@@ -106,7 +109,7 @@ public class RobotMaster {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((robot_id == null) ? 0 : robot_id.hashCode());
+        result = prime * result + ((robot_number == null) ? 0 : robot_number.hashCode());
         return result;
     }
 
@@ -124,10 +127,10 @@ public class RobotMaster {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (robot_id == null) {
-            if (other.robot_id != null)
+        if (robot_number == null) {
+            if (other.robot_number != null)
                 return false;
-        } else if (!robot_id.equals(other.robot_id))
+        } else if (!robot_number.equals(other.robot_number))
             return false;
         return true;
     }
