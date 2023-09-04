@@ -18,7 +18,7 @@ public class RobotMaster implements Serializable {
     private Long id;
 
     private String series;
-    private String robot_number;
+    private String robotNumber;
     private String name;
     private String weapon;
     private String avatar;
@@ -28,11 +28,11 @@ public class RobotMaster implements Serializable {
     public RobotMaster() {
     }
 
-    public RobotMaster(Long id, String series, String robot_number, String name, String weapon, String avatar,
+    public RobotMaster(Long id, String series, String robotNumber, String name, String weapon, String avatar,
             String sprite, String weakness) {
         this.id = id;
         this.series = series;
-        this.robot_number = robot_number;
+        this.robotNumber = robotNumber;
         this.name = name;
         this.weapon = weapon;
         this.avatar = avatar;
@@ -56,12 +56,12 @@ public class RobotMaster implements Serializable {
         this.series = series;
     }
 
-    public String getrobot_number() {
-        return robot_number;
+    public String getRobotNumber() {
+        return robotNumber;
     }
 
-    public void setrobot_number(String robot_number) {
-        this.robot_number = robot_number;
+    public void setRobotNumber(String robotNumber) {
+        this.robotNumber = robotNumber;
     }
 
     public String getName() {
@@ -109,7 +109,7 @@ public class RobotMaster implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((robot_number == null) ? 0 : robot_number.hashCode());
+        result = prime * result + ((robotNumber == null) ? 0 : robotNumber.hashCode());
         return result;
     }
 
@@ -127,10 +127,10 @@ public class RobotMaster implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (robot_number == null) {
-            if (other.robot_number != null)
+        if (robotNumber == null) {
+            if (other.robotNumber != null)
                 return false;
-        } else if (!robot_number.equals(other.robot_number))
+        } else if (!robotNumber.equals(other.robotNumber))
             return false;
         return true;
     }
