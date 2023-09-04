@@ -24,6 +24,16 @@ public class RobotMasterService {
         return repository.findAll();
     }
 
+    public List<RobotMaster> findAllSorted() {
+        return findAll().stream().sorted((a, b) -> a.getName().compareToIgnoreCase(b.getName()))
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public List<RobotMaster> findBySeries(String series) {
+        return findAll().stream().filter(x -> x.getSeries().equalsIgnoreCase(series))
+                .collect(java.util.stream.Collectors.toList());
+    }
+
     public RobotMaster findById(Long id) {
         Optional<RobotMaster> obj = repository.findById(id);
 

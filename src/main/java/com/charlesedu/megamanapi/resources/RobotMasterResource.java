@@ -32,6 +32,20 @@ public class RobotMasterResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping(value = "/series/{series}")
+    public ResponseEntity<List<RobotMaster>> findBySeries(@PathVariable String series) {
+        List<RobotMaster> list = service.findBySeries(series);
+
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/sorted")
+    public ResponseEntity<List<RobotMaster>> findAllSorted() {
+        List<RobotMaster> list = service.findAllSorted();
+
+        return ResponseEntity.ok().body(list);
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<RobotMaster> findById(@PathVariable Long id) {
         RobotMaster obj = service.findById(id);
