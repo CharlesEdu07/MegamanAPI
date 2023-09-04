@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import com.charlesedu.megamanapi.services.RobotMasterService;
 @RestController
 @RequestMapping(value = "/robotmasters")
 public class RobotMasterResource {
-    
+
     @Autowired
     private RobotMasterService service;
 
@@ -23,5 +24,12 @@ public class RobotMasterResource {
         List<RobotMaster> list = service.findAll();
 
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<RobotMaster> findById(@PathVariable Long id) {
+        RobotMaster obj = service.findById(id);
+
+        return ResponseEntity.ok().body(obj);
     }
 }
