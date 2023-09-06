@@ -2,7 +2,7 @@
 
 Um servidor Nodesimples listando os chefes da franquia Megaman.
 
-##Rodando localmente
+## Rodando localmente
 
 Veja como configurar e executar esta API localmente em sua máquina. Certifique-se de seguir cada etapa cuidadosamente para garantir uma configuração adequada.
 
