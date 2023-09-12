@@ -25,13 +25,11 @@ public class RobotMasterService {
     }
 
     public List<RobotMaster> findAllSorted() {
-        return findAll().stream().sorted((a, b) -> a.getName().compareToIgnoreCase(b.getName()))
-                .collect(java.util.stream.Collectors.toList());
+        return repository.findByOrderByName();
     }
 
     public List<RobotMaster> findBySeries(String series) {
-        return findAll().stream().filter(x -> x.getSeries().equalsIgnoreCase(series))
-                .collect(java.util.stream.Collectors.toList());
+        return repository.findBySeries(series);
     }
 
     public RobotMaster findById(Long id) {
