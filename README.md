@@ -46,38 +46,73 @@ Para encerrar a execução da API, você pode parar o processo na sua IDE ou usa
 
 ## APIs
 
-### `GET /`
+### `GET /robotmasters`
 
 Retorna um array com todos os chefes (Robot Masters):
 
 ```json
 [
   {
-    "id": "009",
+    "id": 1,
+    "series": "2",
+    "robotNumber": "009",
     "name": "Metal Man",
     "weapon": "Metal Blade",
-    "avatar": "http://vignette1.wikia.nocookie.net/megaman/images/6/69/Metalmugshot.png",
     ...
   },
   {
-    "id": "010",
+    "id": 2,
+    "series": "2",
+    "robotNumber": "010",
     "name": "Air Man",
     "weapon": "Air Blade",
-    "avatar": "http://vignette1.wikia.nocookie.net/megaman/images/a/af/Airmugshot.png",
     ...
   },
   {
-    "id": "011",
+    "id": 3,
+    "series": "2",
+    "robotNumber": "011",
     "name": "Bubble Man",
     "weapon": "Bubble Lead",
-    "avatar": "http://vignette4.wikia.nocookie.net/megaman/images/5/53/Bubblemugshot.png",
     ...
   },
   ...
 ]
 ```
 
-### `GET /byId/<id>`
+### `GET /robotmasters/sorted`
+
+```json
+[
+  {
+    "id": 2,
+    "series": "2",
+    "robotNumber": "010",
+    "name": "Air Man",
+    "weapon": "Air Blade",
+    ...
+  },
+  {
+    "id": 17,
+    "series": "4",
+    "robotNumber": "025",
+    "name": "Bright Man",
+    "weapon": "Flash Stopper",
+    ...
+  },
+  {
+    "id": 3,
+    "series": "2",
+    "robotNumber": "011",
+    "name": "Bubble Man",
+    "weapon": "Bubble Lead",
+    ...
+  },
+  ...
+]
+```
+
+### `GET /robotmasters/<id>`
 
 Retorna um chefe (Robot Master) pelo seu `<id>`
 
@@ -90,4 +125,38 @@ Retorna um chefe (Robot Master) pelo seu `<id>`
   ...
 }
 
+```
+
+### `GET /robotmasters/<series>`
+
+Retorna um array com todos os chefes (Robot Masters) da série `<series>`:
+
+```json
+[
+  {
+    "id": 17,
+    "series": "4",
+    "robotNumber": "025",
+    "name": "Bright Man",
+    "weapon": "Flash Stopper",
+    ...
+  },
+  {
+    "id": 18,
+    "series": "4",
+    "robotNumber": "026",
+    "name": "Toad Man",
+    "weapon": "Rain Flush",
+    ...
+  },
+  {
+    "id": 19,
+    "series": "4",
+    "robotNumber": "027",
+    "name": "Drill Man",
+    "weapon": "Drill Bomb",
+    ...
+  },
+  ...
+]
 ```
