@@ -82,6 +82,8 @@ Retorna um array com todos os chefes (Robot Masters):
 
 ### `GET /robotmasters/sorted`
 
+Retorna um array com todos os chefes (Robot Masters) ordenados por nome:
+
 ```json
 [
   {
