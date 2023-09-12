@@ -118,10 +118,11 @@ Retorna um chefe (Robot Master) pelo seu `<id>`
 
 ```json
 {
-  "id": "014",
-  "name": "Flash Man",
-  "weapon": "Time Stopper",
-  "avatar": "http://vignette2.wikia.nocookie.net/megaman/images/3/39/Flashmugshot.png",
+  "id": 30,
+  "series": "5",
+  "robotNumber": "038",
+  "name": "Charge Man",
+  "weapon": "Charge Kick",
   ...
 }
 
