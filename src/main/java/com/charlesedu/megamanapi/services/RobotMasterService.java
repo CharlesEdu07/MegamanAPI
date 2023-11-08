@@ -2,6 +2,7 @@ package com.charlesedu.megamanapi.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -32,7 +33,7 @@ public class RobotMasterService {
         return repository.findBySeries(series);
     }
 
-    public RobotMaster findById(Long id) {
+    public RobotMaster findById(UUID id) {
         Optional<RobotMaster> obj = repository.findById(id);
 
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -42,7 +43,7 @@ public class RobotMasterService {
         return repository.save(obj);
     }
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         try {
             if (repository.existsById(id)) {
                 repository.deleteById(id);
@@ -56,7 +57,7 @@ public class RobotMasterService {
         }
     }
 
-    public RobotMaster update(Long id, RobotMaster obj) {
+    public RobotMaster update(UUID id, RobotMaster obj) {
         try {
             RobotMaster entity = repository.getReferenceById(id);
 

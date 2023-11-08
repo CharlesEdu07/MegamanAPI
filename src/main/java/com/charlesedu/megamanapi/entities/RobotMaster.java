@@ -1,21 +1,16 @@
 package com.charlesedu.megamanapi.entities;
 
-import java.io.Serializable;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "tb_robot_master")
-public class RobotMaster implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@Entity(name = "tb_robot_master")
+public class RobotMaster {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
 
     private String series;
     private String robotNumber;
@@ -28,7 +23,7 @@ public class RobotMaster implements Serializable {
     public RobotMaster() {
     }
 
-    public RobotMaster(Long id, String series, String robotNumber, String name, String weapon, String avatar,
+    public RobotMaster(UUID id, String series, String robotNumber, String name, String weapon, String avatar,
             String sprite, String weakness) {
         this.id = id;
         this.series = series;
@@ -40,11 +35,11 @@ public class RobotMaster implements Serializable {
         this.weakness = weakness;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -109,7 +104,6 @@ public class RobotMaster implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((robotNumber == null) ? 0 : robotNumber.hashCode());
         return result;
     }
 
@@ -126,11 +120,6 @@ public class RobotMaster implements Serializable {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (robotNumber == null) {
-            if (other.robotNumber != null)
-                return false;
-        } else if (!robotNumber.equals(other.robotNumber))
             return false;
         return true;
     }

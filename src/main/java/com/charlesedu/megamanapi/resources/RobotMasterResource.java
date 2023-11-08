@@ -2,6 +2,7 @@ package com.charlesedu.megamanapi.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class RobotMasterResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<RobotMaster> findById(@PathVariable Long id) {
+    public ResponseEntity<RobotMaster> findById(@PathVariable UUID id) {
         RobotMaster obj = service.findById(id);
 
         return ResponseEntity.ok().body(obj);
@@ -63,14 +64,14 @@ public class RobotMasterResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         service.delete(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<RobotMaster> update(@PathVariable Long id, @RequestBody RobotMaster obj) {
+    public ResponseEntity<RobotMaster> update(@PathVariable UUID id, @RequestBody RobotMaster obj) {
         obj = service.update(id, obj);
 
         return ResponseEntity.ok().body(obj);
