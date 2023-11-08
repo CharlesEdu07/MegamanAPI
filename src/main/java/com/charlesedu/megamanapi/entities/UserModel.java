@@ -1,14 +1,19 @@
 package com.charlesedu.megamanapi.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_users")
 public class UserModel {
@@ -21,6 +26,10 @@ public class UserModel {
 
     private String name;
     private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<ListRobot> defeated = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -80,6 +89,10 @@ public class UserModel {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<ListRobot> getListRobot() {
+        return defeated;
     }
 
     @Override
