@@ -33,7 +33,8 @@ public class UserResources {
 
         var userCreated = this.service.create(userModel);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
-    }
+        String userCreatedInformation = "Usuário criado com sucesso! Username: " + userCreated.getUsername();
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCreatedInformation);
+    }
 }

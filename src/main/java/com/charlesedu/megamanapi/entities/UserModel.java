@@ -36,6 +36,12 @@ public class UserModel {
         this.createdAt = createdAt;
     }
 
+    public UserModel(UUID id, String username, String name) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+    }
+
     public UUID getId() {
         return id;
     }
