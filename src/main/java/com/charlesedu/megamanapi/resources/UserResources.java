@@ -1,31 +1,39 @@
 package com.charlesedu.megamanapi.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.charlesedu.megamanapi.entities.User;
+import com.charlesedu.megamanapi.entities.UserModel;
 import com.charlesedu.megamanapi.services.UserService;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping("/users")
 public class UserResources {
-    
+
     @Autowired
     private UserService service;
 
-    // @PostMapping(value = "/")
-    // public ResponseEntity<User> create(@RequestBody User obj) {
-    //     var user = this.service.findByUsername(obj.getUsername());
+    @PostMapping("/")
+    public ResponseEntity<?> create(@RequestBody UserModel userModel) {
+        var user = this.service.findByUsername(userModel.getUsername());
 
-    //     if (user != null) {
-    //         return ResponseEntity.badRequest().build();
-    //     }
+        if (user != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existente com este username");
+        }
 
-    //     var newUser = this.service.create(obj);
-    // }
+        var passwordHashred = BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
+        userModel.setPassword(passwordHashred);
+
+        var userCreated = this.service.create(userModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
+    }
 
 }

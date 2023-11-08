@@ -11,7 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity(name = "tb_users")
-public class User {
+public class UserModel {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
@@ -25,10 +25,10 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public User() {
+    public UserModel() {
     }
 
-    public User(UUID id, String username, String name, String password, LocalDateTime createdAt) {
+    public UserModel(UUID id, String username, String name, String password, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -92,7 +92,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        UserModel other = (UserModel) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
