@@ -1,4 +1,4 @@
-package com.charlesedu.megamanapi.resources;
+package com.charlesedu.megamanapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 @RestController
 @RequestMapping("/users")
-public class UserResources {
+public class UserController {
 
     @Autowired
     private UserService service;

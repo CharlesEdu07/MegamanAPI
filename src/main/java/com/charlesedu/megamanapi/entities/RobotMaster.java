@@ -1,10 +1,13 @@
 package com.charlesedu.megamanapi.entities;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_robot_master")
 public class RobotMaster {
@@ -19,6 +22,9 @@ public class RobotMaster {
     private String avatar;
     private String sprite;
     private String weakness;
+
+    @OneToMany(mappedBy = "id.robotMaster")
+    private Set<DefeatedRobot> defeatedRobots = new HashSet<>();
 
     public RobotMaster() {
     }
@@ -97,6 +103,10 @@ public class RobotMaster {
 
     public void setWeakness(String weakness) {
         this.weakness = weakness;
+    }
+
+    public Set<DefeatedRobot> getDefeatedRobots() {
+        return defeatedRobots;
     }
 
     @Override

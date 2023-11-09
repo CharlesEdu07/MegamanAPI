@@ -1,6 +1,6 @@
 package com.charlesedu.megamanapi.entities.pk;
 
-import com.charlesedu.megamanapi.entities.ListRobot;
+import com.charlesedu.megamanapi.entities.RobotList;
 import com.charlesedu.megamanapi.entities.RobotMaster;
 
 import jakarta.persistence.Embeddable;
@@ -11,17 +11,17 @@ import jakarta.persistence.ManyToOne;
 public class DefeatedRobotPK {
     @ManyToOne
     @JoinColumn(name = "list_id")
-    private ListRobot listRobot;
+    private RobotList listRobot;
 
     @ManyToOne
     @JoinColumn(name = "robot_id")
     private RobotMaster robotMaster;
 
-    public ListRobot getListRobot() {
+    public RobotList getListRobot() {
         return listRobot;
     }
 
-    public void setListRobot(ListRobot listRobot) {
+    public void setListRobot(RobotList listRobot) {
         this.listRobot = listRobot;
     }
 

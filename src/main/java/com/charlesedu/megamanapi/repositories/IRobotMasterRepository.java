@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface RobotMasterRepository extends JpaRepository<RobotMaster, UUID> {
+public interface IRobotMasterRepository extends JpaRepository<RobotMaster, UUID> {
     public List<RobotMaster> findByOrderByName();
 
     public List<RobotMaster> findBySeries(String series);

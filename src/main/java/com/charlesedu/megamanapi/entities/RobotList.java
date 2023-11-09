@@ -1,11 +1,9 @@
 package com.charlesedu.megamanapi.entities;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,13 +13,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_list_robots")
-public class ListRobot {
+public class RobotList {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant moment;
+    private LocalDateTime moment;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,10 +27,10 @@ public class ListRobot {
     @OneToMany(mappedBy = "id.listRobot")
     private Set<DefeatedRobot> defeatedRobots = new HashSet<>();
 
-    public ListRobot() {
+    public RobotList() {
     }
 
-    public ListRobot(UUID id, Instant moment, UserModel user) {
+    public RobotList(UUID id, LocalDateTime moment, UserModel user) {
         this.id = id;
         this.moment = moment;
         this.user = user;
@@ -47,11 +44,11 @@ public class ListRobot {
         this.id = id;
     }
 
-    public Instant getMoment() {
+    public LocalDateTime getMoment() {
         return moment;
     }
 
-    public void setMoment(Instant moment) {
+    public void setMoment(LocalDateTime moment) {
         this.moment = moment;
     }
 
@@ -65,5 +62,9 @@ public class ListRobot {
 
     public Set<DefeatedRobot> getDefeatedRobots() {
         return defeatedRobots;
+    }
+
+    public void setDefeatedRobots(Set<DefeatedRobot> defeatedRobots) {
+        this.defeatedRobots = defeatedRobots;
     }
 }

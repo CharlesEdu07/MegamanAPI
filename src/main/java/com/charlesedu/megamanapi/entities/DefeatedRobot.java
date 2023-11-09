@@ -1,5 +1,7 @@
 package com.charlesedu.megamanapi.entities;
 
+import java.time.LocalTime;
+
 import com.charlesedu.megamanapi.entities.pk.DefeatedRobotPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -11,21 +13,23 @@ public class DefeatedRobot {
     private DefeatedRobotPK id = new DefeatedRobotPK();
 
     private Integer damageTaken;
+    private LocalTime time;
 
-    public DefeatedRobot() {
+    public DefeatedRobot(RobotMaster robotMaster, RobotList robotList, Integer damageTaken, LocalTime time) {
     }
 
-    public DefeatedRobot(ListRobot listRobot, RobotMaster robotMaster, Integer damageTaken) {
+    public DefeatedRobot(RobotList listRobot, RobotMaster robotMaster, Integer damageTaken, LocalTime time) {
         id.setListRobot(listRobot);
         id.setRobotMaster(robotMaster);
         this.damageTaken = damageTaken;
+        this.time = time;
     }
 
-    public ListRobot getListRobot() {
+    public RobotList getListRobot() {
         return id.getListRobot();
     }
 
-    public void setListRobot(ListRobot listRobot) {
+    public void setListRobot(RobotList listRobot) {
         id.setListRobot(listRobot);
     }
 
@@ -43,5 +47,13 @@ public class DefeatedRobot {
 
     public void setDamageTaken(Integer damageTaken) {
         this.damageTaken = damageTaken;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

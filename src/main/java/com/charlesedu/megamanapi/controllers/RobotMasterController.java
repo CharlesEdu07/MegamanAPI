@@ -1,4 +1,4 @@
-package com.charlesedu.megamanapi.resources;
+package com.charlesedu.megamanapi.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -21,7 +21,7 @@ import com.charlesedu.megamanapi.services.RobotMasterService;
 
 @RestController
 @RequestMapping(value = "/robotmasters")
-public class RobotMasterResource {
+public class RobotMasterController {
 
     @Autowired
     private RobotMasterService service;

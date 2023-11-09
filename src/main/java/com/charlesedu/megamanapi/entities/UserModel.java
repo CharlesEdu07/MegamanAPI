@@ -29,7 +29,7 @@ public class UserModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<ListRobot> defeated = new ArrayList<>();
+    private List<RobotList> defeated = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -91,7 +91,7 @@ public class UserModel {
         this.createdAt = createdAt;
     }
 
-    public List<ListRobot> getListRobot() {
+    public List<RobotList> getListRobot() {
         return defeated;
     }
 

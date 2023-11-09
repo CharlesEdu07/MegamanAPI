@@ -1,4 +1,4 @@
-package com.charlesedu.megamanapi.resources.exceptions;
+package com.charlesedu.megamanapi.controllers.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

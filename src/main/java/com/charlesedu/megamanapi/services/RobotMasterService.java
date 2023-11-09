@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.charlesedu.megamanapi.entities.RobotMaster;
-import com.charlesedu.megamanapi.repositories.RobotMasterRepository;
+import com.charlesedu.megamanapi.repositories.IRobotMasterRepository;
 import com.charlesedu.megamanapi.services.exceptions.DatabaseException;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
 
@@ -19,7 +19,7 @@ import jakarta.persistence.EntityNotFoundException;
 public class RobotMasterService {
 
     @Autowired
-    private RobotMasterRepository repository;
+    private IRobotMasterRepository repository;
 
     public List<RobotMaster> findAll() {
         return repository.findAll();

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.charlesedu.megamanapi.entities.UserModel;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserModel, UUID> {
+public interface IUserRepository extends JpaRepository<UserModel, UUID> {
     UserModel findByUsername(String username);
 }

@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.charlesedu.megamanapi.entities.RobotMaster;
-import com.charlesedu.megamanapi.repositories.RobotMasterRepository;
+import com.charlesedu.megamanapi.repositories.IRobotMasterRepository;
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
-    private RobotMasterRepository robotMasterRepository;
+    private IRobotMasterRepository robotMasterRepository;
 
     @Override
     public void run(String... args) throws Exception {
