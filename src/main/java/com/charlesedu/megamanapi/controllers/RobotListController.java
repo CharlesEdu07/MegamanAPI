@@ -37,6 +37,8 @@ public class RobotListController {
 
         var robotList = new RobotList();
 
+        System.out.println(robotMaster);
+
         robotList.setUser(this.userService.findById(idUser));
         robotList.getDefeatedRobots().add(new DefeatedRobot(robotList, robotMaster, damageTaken, time));
 

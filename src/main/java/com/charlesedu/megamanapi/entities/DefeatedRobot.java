@@ -3,6 +3,7 @@ package com.charlesedu.megamanapi.entities;
 import java.time.LocalTime;
 
 import com.charlesedu.megamanapi.entities.pk.DefeatedRobotPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -25,6 +26,7 @@ public class DefeatedRobot {
         this.time = time;
     }
 
+    @JsonIgnore
     public RobotList getListRobot() {
         return id.getListRobot();
     }
