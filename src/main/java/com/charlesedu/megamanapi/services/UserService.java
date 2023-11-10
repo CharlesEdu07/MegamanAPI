@@ -1,5 +1,6 @@
 package com.charlesedu.megamanapi.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +19,10 @@ public class UserService {
 
     public UserModel create(UserModel userModel) {
         return repository.save(userModel);
+    }
+
+    public List<UserModel> findAll() {
+        return repository.findAll();
     }
 
     public UserModel findByUsername(String username) {

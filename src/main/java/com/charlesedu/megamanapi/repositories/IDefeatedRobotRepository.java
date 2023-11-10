@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.charlesedu.megamanapi.entities.RobotList;
+import com.charlesedu.megamanapi.entities.DefeatedRobot;
 
 @Repository
-public interface IRobotListRepository extends JpaRepository<RobotList, UUID> {
-    RobotList findByUserId(UUID idUser);
+public interface IDefeatedRobotRepository extends JpaRepository<DefeatedRobot, UUID> {
+    
 }

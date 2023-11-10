@@ -1,5 +1,6 @@
 package com.charlesedu.megamanapi.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-@Entity(name = "tb_users")
-public class UserModel {
+@Entity
+@Table(name = "tb_user")
+public class UserModel implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
@@ -29,7 +34,7 @@ public class UserModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<RobotList> defeated = new ArrayList<>();
+    private List<RobotList> robotList = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -45,18 +50,8 @@ public class UserModel {
         this.createdAt = createdAt;
     }
 
-    public UserModel(UUID id, String username, String name) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-    }
-
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -91,8 +86,8 @@ public class UserModel {
         this.createdAt = createdAt;
     }
 
-    public List<RobotList> getListRobot() {
-        return defeated;
+    public List<RobotList> getRobotList() {
+        return robotList;
     }
 
     @Override
@@ -118,5 +113,11 @@ public class UserModel {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password
+                + ", defeated=" + robotList + ", createdAt=" + createdAt + "]";
     }
 }

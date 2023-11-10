@@ -1,5 +1,6 @@
 package com.charlesedu.megamanapi.config;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.charlesedu.megamanapi.entities.DefeatedRobot;
+import com.charlesedu.megamanapi.entities.RobotList;
 import com.charlesedu.megamanapi.entities.RobotMaster;
+import com.charlesedu.megamanapi.entities.UserModel;
+import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
+import com.charlesedu.megamanapi.repositories.IRobotListRepository;
 import com.charlesedu.megamanapi.repositories.IRobotMasterRepository;
+import com.charlesedu.megamanapi.repositories.IUserRepository;
 
 @Configuration
 @Profile("test")
@@ -16,6 +23,15 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private IRobotMasterRepository robotMasterRepository;
+
+    @Autowired
+    private IUserRepository userRepository;
+
+    @Autowired
+    private IRobotListRepository robotListRepository;
+
+    @Autowired
+    private IDefeatedRobotRepository defeatedRobotRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -185,5 +201,16 @@ public class TestConfig implements CommandLineRunner {
                 robotMaster18, robotMaster19, robotMaster20, robotMaster21, robotMaster22, robotMaster23,
                 robotMaster24, robotMaster25, robotMaster26, robotMaster27, robotMaster28, robotMaster29,
                 robotMaster30, robotMaster31, robotMaster32));
+
+        UserModel userModel1 = new UserModel(null, "charles", "Charles", "123456", null);
+
+        RobotList robotList1 = new RobotList(null, userModel1);
+
+        LocalTime time1 = LocalTime.of(0, 3, 0);
+        DefeatedRobot defeatedRobot1 = new DefeatedRobot(robotList1, robotMaster1, 0, time1);
+
+        userRepository.save(userModel1);
+        robotListRepository.save(robotList1);
+        defeatedRobotRepository.save(defeatedRobot1);
     }
 }

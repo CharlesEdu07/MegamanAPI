@@ -1,8 +1,11 @@
 package com.charlesedu.megamanapi.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_robot_master")
-public class RobotMaster {
+public class RobotMaster implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
@@ -105,6 +110,7 @@ public class RobotMaster {
         this.weakness = weakness;
     }
 
+    @JsonIgnore
     public Set<DefeatedRobot> getDefeatedRobots() {
         return defeatedRobots;
     }
@@ -132,5 +138,12 @@ public class RobotMaster {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "RobotMaster [id=" + id + ", series=" + series + ", robotNumber=" + robotNumber + ", name=" + name
+                + ", weapon=" + weapon + ", avatar=" + avatar + ", sprite=" + sprite + ", weakness=" + weakness
+                + ", defeatedRobots=" + defeatedRobots + "]";
     }
 }
