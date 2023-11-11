@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,6 +73,32 @@ public class RobotListController {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = this.robotListService.findByUserId(idUser);
+
+        return ResponseEntity.ok().body(robotList);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id, HttpServletRequest request) {
+        var idUser = (UUID) request.getAttribute("idUser");
+
+        var robotList = this.robotListService.findByUserId(idUser);
+
+        System.out.println("Dudu");
+
+        if (robotList == null) {
+            return ResponseEntity.badRequest().body("Robot List not found");
+        } else {
+            var targetRobotMaster = robotMasterService.findById(id);
+
+            if (targetRobotMaster == null) {
+                return ResponseEntity.badRequest().body("Robot Master not found");
+            }
+
+            var defeatedRobot = this.defeatedRobotRepository.findByIdRobotListAndIdRobotMaster(robotList,
+                    targetRobotMaster);
+
+            robotList.getDefeatedRobots().remove(defeatedRobot);
+        }
 
         return ResponseEntity.ok().body(robotList);
     }

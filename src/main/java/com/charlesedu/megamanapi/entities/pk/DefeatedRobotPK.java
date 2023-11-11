@@ -67,6 +67,4 @@ public class DefeatedRobotPK implements Serializable {
             return false;
         return true;
     }
-
-    
 }
