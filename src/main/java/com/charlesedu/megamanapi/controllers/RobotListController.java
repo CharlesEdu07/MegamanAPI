@@ -54,8 +54,13 @@ public class RobotListController {
             robotListService.save(robotList);
         }
 
+        var robotMasterId = robotMaster.getId();
+
         if (robotMasterService.findById(robotMaster.getId()) == null) {
             return ResponseEntity.badRequest().body("Robot Master not found");
+        } else if (robotList.getDefeatedRobots().stream()
+                .anyMatch(defeatedRobot -> defeatedRobot.getRobotMaster().getId().equals(robotMasterId))) {
+            return ResponseEntity.badRequest().body("Robot Master already defeated");
         } else {
             robotMaster = robotMasterService.findById(robotMaster.getId());
         }
