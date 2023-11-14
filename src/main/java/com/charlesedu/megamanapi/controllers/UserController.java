@@ -36,9 +36,7 @@ public class UserController {
 
         var userCreated = this.service.create(userModel);
 
-        String userCreatedInformation = "Usuário criado com sucesso! Username: " + userCreated.getUsername();
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userCreatedInformation);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
     }
 
     @GetMapping("/")
