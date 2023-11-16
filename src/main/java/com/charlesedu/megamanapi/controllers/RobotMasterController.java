@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.charlesedu.megamanapi.entities.RobotMaster;
+import com.charlesedu.megamanapi.entities.UserModel;
 import com.charlesedu.megamanapi.services.RobotMasterService;
+import com.charlesedu.megamanapi.services.UserService;
 
 @RestController
 @RequestMapping(value = "/robotmasters")
@@ -19,6 +21,9 @@ public class RobotMasterController {
 
     @Autowired
     private RobotMasterService service;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<RobotMaster>> findAll() {
@@ -46,5 +51,14 @@ public class RobotMasterController {
         RobotMaster obj = service.findById(id);
 
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/list/{id}")
+    public ResponseEntity<List<UserModel>> findUsersWithMinimumDamageAndTimeWithLimit(@PathVariable UUID id) {
+        RobotMaster robotMaster = service.findById(id);
+
+        List<UserModel> list = userService.findUsersWithMinimumDamageAndTimeWithLimit(robotMaster);
+
+        return ResponseEntity.ok().body(list);
     }
 }
