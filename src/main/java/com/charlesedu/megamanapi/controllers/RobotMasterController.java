@@ -2,7 +2,6 @@ package com.charlesedu.megamanapi.controllers;
 
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.charlesedu.megamanapi.entities.DefeatedRobot;
 import com.charlesedu.megamanapi.entities.RobotMaster;
-import com.charlesedu.megamanapi.entities.UserModel;
+import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
 import com.charlesedu.megamanapi.services.RobotMasterService;
-import com.charlesedu.megamanapi.services.UserService;
+import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
 
 @RestController
 @RequestMapping(value = "/robotmasters")
@@ -23,7 +23,7 @@ public class RobotMasterController {
     private RobotMasterService service;
 
     @Autowired
-    private UserService userService;
+    private IDefeatedRobotRepository defeatedRobotRepository;
 
     @GetMapping
     public ResponseEntity<List<RobotMaster>> findAll() {
@@ -54,10 +54,15 @@ public class RobotMasterController {
     }
 
     @GetMapping(value = "/list/{id}")
-    public ResponseEntity<List<UserModel>> findUsersWithMinimumDamageAndTimeWithLimit(@PathVariable UUID id) {
+    public ResponseEntity<List<DefeatedRobot>> findAllDefeatedRobots(@PathVariable UUID id) {
         RobotMaster robotMaster = service.findById(id);
 
-        List<UserModel> list = userService.findUsersWithMinimumDamageAndTimeWithLimit(robotMaster);
+        if (robotMaster == null) {
+            throw new ResourceNotFoundException("RobotMaster not found with id: " + id);
+        }
+
+        List<DefeatedRobot> list = defeatedRobotRepository
+                .findFirst10ById_RobotMasterOrderByDamageTakenAscTimeAsc(robotMaster);
 
         return ResponseEntity.ok().body(list);
     }

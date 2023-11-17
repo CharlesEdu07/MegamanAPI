@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.charlesedu.megamanapi.entities.RobotMaster;
 import com.charlesedu.megamanapi.entities.UserModel;
 import com.charlesedu.megamanapi.repositories.IUserRepository;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
@@ -36,7 +35,7 @@ public class UserService {
         return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public List<UserModel> findUsersWithMinimumDamageAndTimeWithLimit(RobotMaster robotMaster) {
-        return repository.findUsersWithMinimumDamageAndTimeWithLimit(robotMaster);
-    }
+    // public List<UserModel> findUsersWithMinimumDamageAndTimeWithLimit(RobotMaster robotMaster) {
+    //     return repository.findUsersWithMinimumDamageAndTimeWithLimit(robotMaster);
+    // }
 }
