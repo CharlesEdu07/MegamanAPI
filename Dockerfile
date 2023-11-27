@@ -11,6 +11,6 @@ FROM openjdk:17-jdk-slim
 
 EXPOSE 8080
 
-COPY --from=builder /target/megamanapi-0.0.1-SNAPSHOT.jar /megamanapi.jar
+COPY --from=build /target/megamanapi-0.0.1-SNAPSHOT.jar /megamanapi.jar
 
 ENTRYPOINT [ "java", "-jar", "/megamanapi.jar" ]
