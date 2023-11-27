@@ -11,7 +11,7 @@ import com.charlesedu.megamanapi.entities.RobotMaster;
 import com.charlesedu.megamanapi.repositories.IRobotMasterRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner {
 
         @Autowired
