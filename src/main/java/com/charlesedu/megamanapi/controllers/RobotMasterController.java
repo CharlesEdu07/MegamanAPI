@@ -49,14 +49,14 @@ public class RobotMasterController {
         return ResponseEntity.ok().body(list);
     }
 
-    // @GetMapping(value = "/{id}")
-    // public ResponseEntity<RobotMaster> findById(@PathVariable UUID id) {
-    //     RobotMaster obj = service.findById(id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<RobotMaster> findById(@PathVariable UUID id) {
+        RobotMaster obj = service.findById(id);
 
-    //     return ResponseEntity.ok().body(obj);
-    // }
+        return ResponseEntity.ok().body(obj);
+    }
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/score/{id}")
     public ResponseEntity<List<Score>> findAllDefeatedRobots(@PathVariable UUID id) {
         RobotMaster robotMaster = service.findById(id);
 
