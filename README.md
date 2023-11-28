@@ -46,136 +46,70 @@ Para encerrar a execução da API, você pode parar o processo na sua IDE ou usa
 
 # Megaman API Documentation
 
-## Overview
+## Get all Robot Masters
 
-The Megaman API provides endpoints to manage and retrieve information about Robot Masters defeated in battles. It includes operations to get a list of all Robot Masters, find Robot Masters by series, retrieve Robot Masters sorted by name, get details of a specific Robot Master, and fetch scores of defeated robots for a particular Robot Master.
-
-## Endpoints
-
-### 1. Get All Robot Masters
-
-- **Endpoint:** `/`
+- **URL:** `/robotmasters`
 - **Method:** `GET`
-- **Description:** Retrieve a list of all Robot Masters.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: List of RobotMaster objects.
+- **Response:** List of all Robot Masters
 
-### 2. Find Robot Masters by Series
+## Get Robot Masters by Series
 
-- **Endpoint:** `/series/{series}`
+- **URL:** `/robotmasters/series/{series}`
 - **Method:** `GET`
-- **Description:** Retrieve a list of Robot Masters based on the specified series.
-- **Parameters:**
-  - `series` (Path Variable): The series to filter Robot Masters.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: List of RobotMaster objects.
+- **Response:** List of Robot Masters belonging to the specified series
 
-### 3. Get Sorted Robot Masters
+## Get all Robot Masters sorted
 
-- **Endpoint:** `/sorted`
+- **URL:** `/robotmasters/sorted`
 - **Method:** `GET`
-- **Description:** Retrieve a list of Robot Masters sorted by name.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: List of RobotMaster objects.
+- **Response:** List of all Robot Masters sorted
 
-### 4. Get Robot Master by ID
+## Get Robot Master by ID
 
-- **Endpoint:** `/{id}`
+- **URL:** `/robotmasters/{id}`
 - **Method:** `GET`
-- **Description:** Retrieve details of a specific Robot Master by its ID.
-- **Parameters:**
-  - `id` (Path Variable): The ID of the Robot Master.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: RobotMaster object.
+- **Response:** Details of the Robot Master with the specified ID
 
-### 5. Get Scores of Defeated Robots for a Robot Master
+## Get scores of defeated robots by Robot Master ID
 
-- **Endpoint:** `/score/{id}`
+- **URL:** `/robotmasters/score/{id}`
 - **Method:** `GET`
-- **Description:** Retrieve scores of defeated robots for a specific Robot Master.
-- **Parameters:**
-  - `id` (Path Variable): The ID of the Robot Master.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: List of Score objects.
-- **Error Handling:**
-  - Status Code: 404 Not Found
-  - Body: ResourceNotFoundException if the Robot Master with the specified ID is not found.
+- **Response:** List of scores (user, damage taken, time) for the defeated robots of the specified Robot Master ID
 
-### 6. Create a New Robot Master
+# UserController
 
-- **Endpoint:** `/`
+## Create a new user
+
+- **URL:** `/users/`
 - **Method:** `POST`
-- **Description:** Create a new Robot Master.
-- **Request Body:**
-  - RobotMaster object.
-- **Response:**
-  - Status Code: 201 Created
-  - Body: RobotMaster object with the generated ID.
-- **Error Handling:**
-  - Status Code: 400 Bad Request
-  - Body: If the request body is invalid.
+- **Request Body:** User model information (username, password)
+- **Response:** Created user details or error message if the username already exists
 
-### 7. Update a Robot Master
+## Get all users
 
-- **Endpoint:** `/{id}`
-- **Method:** `PUT`
-- **Description:** Update details of a specific Robot Master.
-- **Parameters:**
-  - `id` (Path Variable): The ID of the Robot Master.
-- **Request Body:**
-  - RobotMaster object with updated details.
-- **Response:**
-  - Status Code: 200 OK
-  - Body: Updated RobotMaster object.
-- **Error Handling:**
-  - Status Code: 404 Not Found
-  - Body: ResourceNotFoundException if the Robot Master with the specified ID is not found.
-  - Status Code: 400 Bad Request
-  - Body: If the request body is invalid.
+- **URL:** `/users/`
+- **Method:** `GET`
+- **Response:** List of all users
 
-### 8. Delete a Robot Master
+# RobotListController
 
-- **Endpoint:** `/{id}`
+## Register a defeated Robot Master
+
+- **URL:** `/robotlist/register`
+- **Method:** `POST`
+- **Request Body:** Robot Master information
+- **Request Parameters:** Damage taken, time
+- **Response:** Updated Robot List or error message if Robot Master is not found or already defeated
+
+## Get Robot List for the current user
+
+- **URL:** `/robotlist/list`
+- **Method:** `GET`
+- **Response:** Robot List for the current user
+
+## Delete a defeated Robot Master from the Robot List
+
+- **URL:** `/robotlist/delete/{id}`
 - **Method:** `DELETE`
-- **Description:** Delete a specific Robot Master.
-- **Parameters:**
-  - `id` (Path Variable): The ID of the Robot Master.
-- **Response:**
-  - Status Code: 204 No Content
-- **Error Handling:**
-  - Status Code: 404 Not Found
-  - Body: ResourceNotFoundException if the Robot Master with the specified ID is not found.
-  - Status Code: 500 Internal Server Error
-  - Body: DatabaseException if an error occurs during the deletion process.
-
-## Data Models
-
-### RobotMaster
-
-- `id` (UUID): Unique identifier for the Robot Master.
-- `series` (String): The series to which the Robot Master belongs.
-- `robotNumber` (int): The number assigned to the Robot Master.
-- `name` (String): The name of the Robot Master.
-- `weapon` (String): The primary weapon of the Robot Master.
-- `avatar` (String): URL or path to the Robot Master's avatar image.
-- `sprite` (String): URL or path to the Robot Master's sprite image.
-- `weakness` (String): The weakness of the Robot Master.
-
-### Score
-
-- `user` (String): The username of the user who defeated the Robot Master.
-- `robotMaster` (RobotMaster): The details of the defeated Robot Master.
-- `damageTaken` (int): The amount of damage taken by the user during the battle.
-- `time` (Timestamp): The timestamp of when the battle took place.
-
-## Error Handling
-
-The API handles errors with appropriate HTTP status codes and provides detailed error messages in the response body. Common error responses include:
-
-- 400 Bad Request: I
-
+- **Request Parameters:** Robot Master ID
+- **Response:** Updated Robot List or error message if Robot List or Robot Master is not found
