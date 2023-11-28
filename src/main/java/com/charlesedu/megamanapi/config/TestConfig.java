@@ -19,6 +19,10 @@ public class TestConfig implements CommandLineRunner {
 
         @Override
         public void run(String... args) throws Exception {
+                if (robotMasterRepository.count() > 0) {
+                        return;
+                }
+
                 RobotMaster robotMaster1 = new RobotMaster(null, "2", "009", "Metal Man", "Metal Blade",
                                 "http://vignette1.wikia.nocookie.net/megaman/images/6/69/Metalmugshot.png",
                                 "http://vignette4.wikia.nocookie.net/megaman/images/e/e3/Metalsprite.png",
