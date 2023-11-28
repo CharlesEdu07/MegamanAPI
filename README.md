@@ -50,10 +50,6 @@ Para encerrar a execução da API, você pode parar o processo na sua IDE ou usa
 
 The Megaman API provides endpoints to manage and retrieve information about Robot Masters defeated in battles. It includes operations to get a list of all Robot Masters, find Robot Masters by series, retrieve Robot Masters sorted by name, get details of a specific Robot Master, and fetch scores of defeated robots for a particular Robot Master.
 
-## Base URL
-
-The base URL for accessing the Megaman API is `http://your-api-base-url/robotmasters`.
-
 ## Endpoints
 
 ### 1. Get All Robot Masters
