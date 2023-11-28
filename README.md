@@ -44,122 +44,86 @@ Depois de iniciar a API, você pode testá-la usando uma ferramenta como [Postma
 
 Para encerrar a execução da API, você pode parar o processo na sua IDE ou usar o comando `Ctrl+C` no terminal em que a API está sendo executada.
 
-## APIs
+# Robot Master API
+
+## Get All Robot Masters
 
 ### `GET /robotmasters`
 
-Retorna um array com todos os chefes (Robot Masters):
+Retrieve all Robot Masters.
 
-```json
-[
-  {
-    "id": 1,
-    "series": "2",
-    "robotNumber": "009",
-    "name": "Metal Man",
-    "weapon": "Metal Blade",
-    ...
-  },
-  {
-    "id": 2,
-    "series": "2",
-    "robotNumber": "010",
-    "name": "Air Man",
-    "weapon": "Air Blade",
-    ...
-  },
-  {
-    "id": 3,
-    "series": "2",
-    "robotNumber": "011",
-    "name": "Bubble Man",
-    "weapon": "Bubble Lead",
-    ...
-  },
-  ...
-]
-```
+**Response:**
+- 200 OK: Returns the list of all Robot Masters.
+
+## Get Robot Masters by Series
+
+### `GET /robotmasters/series/{series}`
+
+Retrieve Robot Masters by series.
+
+**Parameters:**
+- `series` (String): Series name.
+
+**Response:**
+- 200 OK: Returns the list of Robot Masters in the specified series.
+
+## Get All Robot Masters Sorted
 
 ### `GET /robotmasters/sorted`
 
-Retorna um array com todos os chefes (Robot Masters) ordenados por nome:
+Retrieve all Robot Masters sorted.
 
-```json
-[
-  {
-    "id": 2,
-    "series": "2",
-    "robotNumber": "010",
-    "name": "Air Man",
-    "weapon": "Air Blade",
-    ...
-  },
-  {
-    "id": 17,
-    "series": "4",
-    "robotNumber": "025",
-    "name": "Bright Man",
-    "weapon": "Flash Stopper",
-    ...
-  },
-  {
-    "id": 3,
-    "series": "2",
-    "robotNumber": "011",
-    "name": "Bubble Man",
-    "weapon": "Bubble Lead",
-    ...
-  },
-  ...
-]
-```
+**Response:**
+- 200 OK: Returns the list of all Robot Masters sorted.
 
-### `GET /robotmasters/<id>`
+## Get Robot Master by ID
 
-Retorna um chefe (Robot Master) pelo seu `<id>`
+### `GET /robotmasters/{id}`
 
-```json
-{
-  "id": 30,
-  "series": "5",
-  "robotNumber": "038",
-  "name": "Charge Man",
-  "weapon": "Charge Kick",
-  ...
-}
+Retrieve a specific Robot Master by ID.
 
-```
+**Parameters:**
+- `id` (UUID): Robot Master ID.
 
-### `GET /robotmasters/<series>`
+**Response:**
+- 200 OK: Returns the Robot Master details.
+- 404 Not Found: If Robot Master not found.
 
-Retorna um array com todos os chefes (Robot Masters) da série `<series>`:
+## Get Defeated Robots and Scores for a Robot Master
 
-```json
-[
-  {
-    "id": 17,
-    "series": "4",
-    "robotNumber": "025",
-    "name": "Bright Man",
-    "weapon": "Flash Stopper",
-    ...
-  },
-  {
-    "id": 18,
-    "series": "4",
-    "robotNumber": "026",
-    "name": "Toad Man",
-    "weapon": "Rain Flush",
-    ...
-  },
-  {
-    "id": 19,
-    "series": "4",
-    "robotNumber": "027",
-    "name": "Drill Man",
-    "weapon": "Drill Bomb",
-    ...
-  },
-  ...
-]
-```
+### `GET /robotmasters/score/{id}`
+
+Retrieve the top 10 scores (defeated robots) for a specific Robot Master.
+
+**Parameters:**
+- `id` (UUID): Robot Master ID.
+
+**Response:**
+- 200 OK: Returns the list of scores.
+
+---
+
+# User API
+
+## Create User
+
+### `POST /users/`
+
+Create a new user.
+
+**Request:**
+- Body:
+  - `UserModel` (JSON): User details.
+
+**Response:**
+- 201 Created: Returns the created user.
+- 400 Bad Request: If the username already exists.
+
+## Get All Users
+
+### `GET /users/`
+
+Retrieve the list of all users.
+
+**Response:**
+- 200 OK: Returns the list of all users.
