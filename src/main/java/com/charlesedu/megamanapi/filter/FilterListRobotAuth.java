@@ -30,6 +30,11 @@ public class FilterListRobotAuth extends OncePerRequestFilter {
         if (servletPath.startsWith("/robotlist/")) {
             var authorization = request.getHeader("Authorization");
 
+            if (authorization == null || !authorization.startsWith("Basic")) {
+                response.sendError(401);
+                return;
+            }
+
             var authEncoded = authorization.substring("Basic".length()).trim();
 
             byte[] authDecoded = Base64.getDecoder().decode(authEncoded);

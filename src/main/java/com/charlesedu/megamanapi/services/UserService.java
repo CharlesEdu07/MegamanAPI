@@ -25,7 +25,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public UserModel findByUsername(String username) {
+    public UserModel findByUsername(String username) {        
         return repository.findByUsername(username);
     }
 
@@ -34,8 +34,4 @@ public class UserService {
 
         return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
-
-    // public List<UserModel> findUsersWithMinimumDamageAndTimeWithLimit(RobotMaster robotMaster) {
-    //     return repository.findUsersWithMinimumDamageAndTimeWithLimit(robotMaster);
-    // }
 }

@@ -1,17 +1,15 @@
 package com.charlesedu.megamanapi.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.charlesedu.megamanapi.dto.UserDTO;
 import com.charlesedu.megamanapi.entities.UserModel;
 import com.charlesedu.megamanapi.services.UserService;
 
@@ -25,8 +23,8 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/")
-    public ResponseEntity<?> create(@RequestBody UserModel userModel) {
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UserModel userModel) {
         var user = this.service.findByUsername(userModel.getUsername());
 
         if (user != null) {
@@ -41,10 +39,20 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<UserModel>> findAll() {
-        List<UserModel> list = service.findAll();
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+        var user = this.service.findByUsername(userDTO.getUsername());
 
-        return ResponseEntity.ok().body(list);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário não encontrado");
+        }
+
+        var passwordVerify = BCrypt.verifyer().verify(userDTO.getPassword().toCharArray(), user.getPassword());
+
+        if (!passwordVerify.verified) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Senha incorreta");
+        }
+
+        return ResponseEntity.ok(user);
     }
 }
