@@ -48,7 +48,7 @@ Para encerrar a execução da API, você pode parar o processo na sua IDE ou usa
 
 ## Get all Robot Masters
 
-- **URL:** `/robotmasters`
+- **URL:** `/robotmasters/`
 - **Method:** `GET`
 - **Response:** List of all Robot Masters
 
@@ -80,30 +80,30 @@ Para encerrar a execução da API, você pode parar o processo na sua IDE ou usa
 
 ## Create a new user
 
-- **URL:** `/users/`
+- **URL:** `/users/create`
 - **Method:** `POST`
-- **Request Body:** User model information (username, password)
+- **Request Body:** User model information (username, name, password)
 - **Response:** Created user details or error message if the username already exists
 
-## Get all users
+## Login
 
-- **URL:** `/users/`
-- **Method:** `GET`
-- **Response:** List of all users
+- **URL:** `/users/login`
+- **Method:** `POST`
+- **Request Body:** User model information (username, password)
+- **Response:** User details or error message if the username or password is incorrect
 
 # RobotListController
 
 ## Register a defeated Robot Master
 
-- **URL:** `/robotlist/register`
+- **URL:** `/robotlist/save`
 - **Method:** `POST`
-- **Request Body:** Robot Master information
-- **Request Parameters:** Damage taken, time
+- **Request Body:** Robot Master ID, damage taken, time (LocalDateTime format)
 - **Response:** Updated Robot List or error message if Robot Master is not found or already defeated
 
 ## Get Robot List for the current user
 
-- **URL:** `/robotlist/list`
+- **URL:** `/robotlist/`
 - **Method:** `GET`
 - **Response:** Robot List for the current user
 

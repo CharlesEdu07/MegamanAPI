@@ -30,7 +30,7 @@ public class RobotMasterController {
     @Autowired
     private DefeatedRobotService defeatedRobotService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<RobotMaster>> findAll() {
         List<RobotMaster> list = service.findAll();
 
