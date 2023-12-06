@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.charlesedu.megamanapi.dto.ScoreDTO;
 import com.charlesedu.megamanapi.entities.DefeatedRobot;
 import com.charlesedu.megamanapi.entities.RobotMaster;
-import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
+import com.charlesedu.megamanapi.services.DefeatedRobotService;
 import com.charlesedu.megamanapi.services.RobotMasterService;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
 
@@ -28,7 +28,7 @@ public class RobotMasterController {
     private RobotMasterService service;
 
     @Autowired
-    private IDefeatedRobotRepository defeatedRobotRepository;
+    private DefeatedRobotService defeatedRobotService;
 
     @GetMapping
     public ResponseEntity<List<RobotMaster>> findAll() {
@@ -66,8 +66,7 @@ public class RobotMasterController {
             throw new ResourceNotFoundException("RobotMaster not found with id: " + id);
         }
 
-        List<DefeatedRobot> list = defeatedRobotRepository
-                .findFirst10ById_RobotMasterOrderByDamageTakenAscTimeAsc(robotMaster);
+        List<DefeatedRobot> list = defeatedRobotService.findFirstScores(robotMaster);
 
         List<ScoreDTO> scores = list.stream()
                 .map(x -> new ScoreDTO(
@@ -78,5 +77,12 @@ public class RobotMasterController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(scores);
+    }
+
+    @GetMapping("/listDefeatedRobots")
+    public ResponseEntity<List<DefeatedRobot>> listDefeatedRobots() {
+        List<DefeatedRobot> list = defeatedRobotService.findAll();
+
+        return ResponseEntity.ok().body(list);
     }
 }

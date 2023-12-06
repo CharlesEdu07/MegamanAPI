@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.charlesedu.megamanapi.dto.RobotDTO;
 import com.charlesedu.megamanapi.entities.DefeatedRobot;
 import com.charlesedu.megamanapi.entities.RobotList;
-import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
+import com.charlesedu.megamanapi.services.DefeatedRobotService;
 import com.charlesedu.megamanapi.services.RobotListService;
 import com.charlesedu.megamanapi.services.RobotMasterService;
 import com.charlesedu.megamanapi.services.UserService;
@@ -38,7 +38,7 @@ public class RobotListController {
     private RobotMasterService robotMasterService;
 
     @Autowired
-    private IDefeatedRobotRepository defeatedRobotRepository;
+    private DefeatedRobotService defeatedRobotService;
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody RobotDTO robotDTO, HttpServletRequest request) {
@@ -68,7 +68,7 @@ public class RobotListController {
         }
 
         var defeatedRobot = new DefeatedRobot(robotList, robotMaster, robotDTO.getDamageTaken(), robotDTO.getTime());
-        var savedDefeatedRobot = defeatedRobotRepository.save(defeatedRobot);
+        var savedDefeatedRobot = defeatedRobotService.save(defeatedRobot);
 
         robotList.getDefeatedRobots().add(savedDefeatedRobot);
 
@@ -99,10 +99,14 @@ public class RobotListController {
                 return ResponseEntity.badRequest().body("Robot Master not found");
             }
 
-            var defeatedRobot = this.defeatedRobotRepository.findByIdRobotListAndIdRobotMaster(robotList,
+            var defeatedRobot = this.defeatedRobotService.findByIdRobotListAndIdRobotMaster(robotList,
                     targetRobotMaster);
 
             robotList.getDefeatedRobots().remove(defeatedRobot);
+
+            this.robotListService.save(robotList);
+
+            this.defeatedRobotService.delete(defeatedRobot);
         }
 
         return ResponseEntity.ok().body(robotList);
