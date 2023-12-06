@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.charlesedu.megamanapi.dto.ScoreDTO;
 import com.charlesedu.megamanapi.entities.DefeatedRobot;
 import com.charlesedu.megamanapi.entities.RobotMaster;
-import com.charlesedu.megamanapi.entities.Score;
 import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
 import com.charlesedu.megamanapi.services.RobotMasterService;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
@@ -59,7 +59,7 @@ public class RobotMasterController {
     }
 
     @GetMapping(value = "/score/{id}")
-    public ResponseEntity<List<Score>> findAllDefeatedRobots(@PathVariable UUID id) {
+    public ResponseEntity<List<ScoreDTO>> findAllDefeatedRobots(@PathVariable UUID id) {
         RobotMaster robotMaster = service.findById(id);
 
         if (robotMaster == null) {
@@ -69,8 +69,8 @@ public class RobotMasterController {
         List<DefeatedRobot> list = defeatedRobotRepository
                 .findFirst10ById_RobotMasterOrderByDamageTakenAscTimeAsc(robotMaster);
 
-        List<Score> scores = list.stream()
-                .map(x -> new Score(
+        List<ScoreDTO> scores = list.stream()
+                .map(x -> new ScoreDTO(
                         x.getRobotList().getUser(),
                         x.getRobotMaster(),
                         x.getDamageTaken(),

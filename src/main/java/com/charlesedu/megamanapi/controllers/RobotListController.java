@@ -1,6 +1,5 @@
 package com.charlesedu.megamanapi.controllers;
 
-import java.time.LocalTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.charlesedu.megamanapi.dto.RobotDTO;
 import com.charlesedu.megamanapi.entities.DefeatedRobot;
 import com.charlesedu.megamanapi.entities.RobotList;
-import com.charlesedu.megamanapi.entities.RobotMaster;
 import com.charlesedu.megamanapi.repositories.IDefeatedRobotRepository;
 import com.charlesedu.megamanapi.services.RobotListService;
 import com.charlesedu.megamanapi.services.RobotMasterService;
@@ -42,10 +40,8 @@ public class RobotListController {
     @Autowired
     private IDefeatedRobotRepository defeatedRobotRepository;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> save(@RequestBody RobotMaster robotMaster,
-            @RequestParam("damage") Integer damageTaken,
-            @RequestParam("time") LocalTime time, HttpServletRequest request) {
+    @PostMapping("/save")
+    public ResponseEntity<?> save(@RequestBody RobotDTO robotDTO, HttpServletRequest request) {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = robotListService.findByUserId(idUser);
@@ -56,18 +52,22 @@ public class RobotListController {
             robotListService.save(robotList);
         }
 
-        var robotMasterId = robotMaster.getId();
+        var robotMasterId = robotDTO.getId();
 
-        if (robotMasterService.findById(robotMaster.getId()) == null) {
+        var robotMaster = robotMasterService.findById(robotMasterId);
+
+        if (robotMaster == null) {
             return ResponseEntity.badRequest().body("Robot Master not found");
+
         } else if (robotList.getDefeatedRobots().stream()
                 .anyMatch(defeatedRobot -> defeatedRobot.getRobotMaster().getId().equals(robotMasterId))) {
             return ResponseEntity.badRequest().body("Robot Master already defeated");
+
         } else {
-            robotMaster = robotMasterService.findById(robotMaster.getId());
+            robotMaster = robotMasterService.findById(robotMasterId);
         }
 
-        var defeatedRobot = new DefeatedRobot(robotList, robotMaster, damageTaken, time);
+        var defeatedRobot = new DefeatedRobot(robotList, robotMaster, robotDTO.getDamageTaken(), robotDTO.getTime());
         var savedDefeatedRobot = defeatedRobotRepository.save(defeatedRobot);
 
         robotList.getDefeatedRobots().add(savedDefeatedRobot);
@@ -89,8 +89,6 @@ public class RobotListController {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = this.robotListService.findByUserId(idUser);
-
-        System.out.println("Dudu");
 
         if (robotList == null) {
             return ResponseEntity.badRequest().body("Robot List not found");

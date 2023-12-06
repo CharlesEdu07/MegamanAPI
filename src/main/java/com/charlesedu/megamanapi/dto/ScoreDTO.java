@@ -1,18 +1,21 @@
-package com.charlesedu.megamanapi.entities;
+package com.charlesedu.megamanapi.dto;
 
 import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Score implements Serializable {
+import com.charlesedu.megamanapi.entities.RobotMaster;
+import com.charlesedu.megamanapi.entities.UserModel;
+
+public class ScoreDTO implements Serializable {
     private UserModel user;
     private RobotMaster robotMaster;
     private Integer damageTaken;
     private LocalTime time;
 
-    public Score() {
+    public ScoreDTO() {
     }
 
-    public Score(UserModel user, RobotMaster robotMaster, Integer damageTaken, LocalTime time) {
+    public ScoreDTO(UserModel user, RobotMaster robotMaster, Integer damageTaken, LocalTime time) {
         this.user = user;
         this.robotMaster = robotMaster;
         this.damageTaken = damageTaken;
