@@ -75,7 +75,7 @@ public class RobotListController {
         return ResponseEntity.ok().body(robotList);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public ResponseEntity<?> list(HttpServletRequest request) {
         var idUser = (UUID) request.getAttribute("idUser");
 

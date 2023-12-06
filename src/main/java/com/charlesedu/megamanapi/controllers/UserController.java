@@ -23,8 +23,8 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserModel userModel) {
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody UserModel userModel) {
         var user = this.service.findByUsername(userModel.getUsername());
 
         if (user != null) {
