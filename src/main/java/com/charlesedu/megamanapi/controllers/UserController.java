@@ -3,6 +3,7 @@ package com.charlesedu.megamanapi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.charlesedu.megamanapi.services.UserService;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
