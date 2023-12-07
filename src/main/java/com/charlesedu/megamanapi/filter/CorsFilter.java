@@ -2,6 +2,8 @@ package com.charlesedu.megamanapi.filter;
 
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -10,6 +12,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Component
 public class CorsFilter implements Filter {
 
     @Override
