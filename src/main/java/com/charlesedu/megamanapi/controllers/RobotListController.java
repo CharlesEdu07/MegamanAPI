@@ -38,8 +38,8 @@ public class RobotListController {
     @Autowired
     private DefeatedRobotService defeatedRobotService;
 
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody RobotDTO robotDTO, HttpServletRequest request) {
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RobotDTO robotDTO, HttpServletRequest request) {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = robotListService.findByUserId(idUser);
