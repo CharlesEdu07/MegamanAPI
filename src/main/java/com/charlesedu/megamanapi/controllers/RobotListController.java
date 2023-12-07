@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.charlesedu.megamanapi.dto.RobotDTO;
 import com.charlesedu.megamanapi.entities.DefeatedRobot;
@@ -41,7 +42,7 @@ public class RobotListController {
     private DefeatedRobotService defeatedRobotService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody RobotDTO robotDTO, HttpServletRequest request) {
+    public ResponseEntity<?> save(@RequestBody RobotDTO robotDTO, HttpServletRequest request, CorsRegistry registry) {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = robotListService.findByUserId(idUser);
@@ -76,7 +77,7 @@ public class RobotListController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> list(HttpServletRequest request) {
+    public ResponseEntity<?> list(HttpServletRequest request, CorsRegistry registry) {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = this.robotListService.findByUserId(idUser);
@@ -85,7 +86,7 @@ public class RobotListController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id, HttpServletRequest request) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, HttpServletRequest request, CorsRegistry registry) {
         var idUser = (UUID) request.getAttribute("idUser");
 
         var robotList = this.robotListService.findByUserId(idUser);
