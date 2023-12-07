@@ -19,7 +19,7 @@ import com.charlesedu.megamanapi.services.DefeatedRobotService;
 import com.charlesedu.megamanapi.services.RobotMasterService;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
 
-@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/robotmasters")
 public class RobotMasterController {

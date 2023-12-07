@@ -57,6 +57,10 @@ public class FilterListRobotAuth extends OncePerRequestFilter {
                     if (passwordVerify.verified) {
                         request.setAttribute("idUser", user.getId());
 
+                        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+                        response.setHeader("Access-Control-Allow-Credentials", "true");
+                        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+
                         filterChain.doFilter(request, response);
                     } else {
                         response.sendError(401);

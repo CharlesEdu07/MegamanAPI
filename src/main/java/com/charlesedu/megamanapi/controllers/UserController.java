@@ -15,7 +15,7 @@ import com.charlesedu.megamanapi.services.UserService;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {

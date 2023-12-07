@@ -23,7 +23,7 @@ import com.charlesedu.megamanapi.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/robotlist")
 public class RobotListController {
