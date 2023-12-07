@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import com.charlesedu.megamanapi.services.DefeatedRobotService;
 import com.charlesedu.megamanapi.services.RobotMasterService;
 import com.charlesedu.megamanapi.services.exceptions.ResourceNotFoundException;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/robotmasters")
 public class RobotMasterController {
