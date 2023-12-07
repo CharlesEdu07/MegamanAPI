@@ -28,6 +28,12 @@ public class FilterListRobotAuth extends OncePerRequestFilter {
         var servletPath = request.getServletPath();
 
         if (servletPath.startsWith("/robotlist/")) {
+            if ("OPTIONS".equals(request.getMethod())) {
+                filterChain.doFilter(request, response);
+                
+                return;
+            }
+
             var authorization = request.getHeader("Authorization");
 
             if (authorization == null || !authorization.startsWith("Basic")) {
