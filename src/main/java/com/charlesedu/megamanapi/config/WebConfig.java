@@ -16,7 +16,9 @@ public class WebConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("https://megaman-speedrun-81ua.vercel.app/", "http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
-                        .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization");
+                        .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
+                        .exposedHeaders("Authorization")
+                        .allowCredentials(true);
             }
         };
     }
