@@ -14,8 +14,8 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://megaman-speedrun-81ua.vercel.app/", "http://localhost:3000")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
+                        .allowedOrigins("https://megaman-speedrun-81ua.vercel.app", "http://localhost:3000")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT", "OPTIONS")
                         .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
                         .exposedHeaders("Authorization")
                         .allowCredentials(true);

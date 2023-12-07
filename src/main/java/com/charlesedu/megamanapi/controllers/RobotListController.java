@@ -23,7 +23,7 @@ import com.charlesedu.megamanapi.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin
+@CrossOrigin(origins = {"https://megaman-speedrun-81ua.vercel.app", "http://localhost:3000"})
 @RestController
 @RequestMapping("/robotlist")
 public class RobotListController {
