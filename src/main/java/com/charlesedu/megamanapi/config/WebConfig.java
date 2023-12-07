@@ -16,7 +16,7 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedOrigins("https://megaman-speedrun-81ua.vercel.app/")
+                        .allowedOrigins("https://megaman-speedrun-81ua.vercel.app", "http://localhost:3000")
                         .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(),
                                 HttpMethod.DELETE.name())
                         .allowedHeaders("Content-Type", "Authorization");
